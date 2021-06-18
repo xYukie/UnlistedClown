@@ -1,0 +1,135 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+
+public class Login {
+
+    public static void main(String[] args) {
+
+        boolean okLogin = login();
+
+        while (!okLogin) {
+            System.out.println("Errato, ritenta.");
+            okLogin = login();
+        }
+
+        System.out.println("Login ok.");
+        cercaCentroVaccinale();
+        //da qui lancia metodo per ricerca centro vaccinale con login
+
+    }
+
+
+    public static boolean login() {
+        Scanner input = new Scanner(System.in);
+        boolean found = false;
+        String filePath = "Cittadini_Registrati.txt";
+        String fileUsername = null;
+        String filePassword = null;
+
+
+        System.out.println("Inserisci username: ");
+        String username = input.nextLine();
+        System.out.println("Inserisci password: ");
+        String password = input.nextLine();
+
+
+        try {
+            Scanner file = new Scanner(new File(filePath));
+            file.useDelimiter("[,\n]");
+
+            while(file.hasNext() && !found) {
+                fileUsername = file.next();
+                filePassword = file.next();
+
+                if(fileUsername.trim().equals(username.trim()) && filePassword.trim().equals(password.trim())) {
+                    found = true;
+                }
+            }
+            file.close();
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File " + filePath + " non trovato.");
+        }
+        return found;
+    }
+
+
+
+
+
+    public static void cercaCentroVaccinale() {
+        Scanner input = new Scanner(System.in);
+        String filePath = "CentriVaccinali.txt";
+        File centri = new File(filePath);
+        String nomeCentro = null;
+        int ricerca = 0;
+        boolean found = false;
+
+        System.out.println("Per effettuare la ricerca per nome del centro vaccinale premere 1. Per la ricerca per comune e tipologia premere 2.");
+        ricerca = input.nextInt();
+
+
+        while(ricerca!=1 && ricerca!=2) {
+            System.out.println("Tasto errato, riprovare");
+            ricerca = input.nextInt();
+        }
+
+
+        if(ricerca==1) {
+            System.out.println("Inserisci il nome del centro vaccinale: ");
+            nomeCentro = input.nextLine();
+
+            try {
+                Scanner file = new Scanner(centri);
+
+                while(file.hasNext() && !found) {
+                    String fileCentro = file.next();
+                    if(fileCentro.equalsIgnoreCase(nomeCentro)) {
+                        //visualizzaInfoCentroVaccinale();
+                        found = true;
+                    } else {
+                        System.out.println("Il centro da lei cercato non è presente nei nostri archivi. Riprovi.");
+                    }
+                }
+                file.close();
+
+            } catch (FileNotFoundException e) {
+                System.out.println("File " + filePath + " non trovato.");
+            }
+
+
+        } else {
+            System.out.println("Inserisci il comune del centro vaccinale: ");
+            String comune = input.nextLine();
+            System.out.println("Inserisci la tipologia del centro vaccinale (ospedaliero/aziendale/hub): ");
+            String tipologia = input.nextLine();
+
+            try {
+                Scanner file = new Scanner(centri);
+                file.useDelimiter("[,\n]");
+
+                while(file.hasNext() && !found) {
+                    String comuneCentro = file.next();
+                    String tipologiaCentro = file.next();
+
+                    if(comuneCentro.equalsIgnoreCase(comune) && tipologiaCentro.equalsIgnoreCase(tipologia)) {
+                        //visualizzaInfoCentroVaccinale();
+                        found = true;
+                    } else {
+                        System.out.println("Il centro da lei cercato non è presente nei nostri archivi. Riprovi.");
+                    }
+                }
+                file.close();
+
+            } catch (FileNotFoundException e) {
+                System.out.println("File " + filePath + " not found");
+            }
+
+
+        }
+
+
+    }
+}
