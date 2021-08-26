@@ -29,6 +29,7 @@ public class Login {
                 }
                 else
                     System.out.println("Password errata, riprova.");
+                    password = input.nextLine();
             }
         }
         if(ok)
