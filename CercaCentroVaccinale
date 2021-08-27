@@ -53,7 +53,7 @@ public class CercaCentroVaccinale {
 
             for(int i=0;i<line_comune.length;i++){
                 if(line_comune[i]!=null){
-                    dim++
+                    dim++;
                 }
                 else{
                     break;
