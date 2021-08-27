@@ -20,28 +20,23 @@ public class CercaCentroVaccinale {
             System.out.println("Inserisci il nome del centro vaccinale: ");
             String nome_centro = input.nextLine();
 
-            int[] line_nome_centri = file_centri_op.getLine(nome_centro); 
+            int line_nome_centri = file_centri_op.getLine(nome_centro);
 
-            while (line_nome_centri==0) {
+            while (line_nome_centri==-1) {
                 System.out.println("Centro non trovato, riprova: ");
                 nome_centro = input.nextLine();
-                int[] line_nome_centri = file_centri_op.getLine(nome_centro);
+                line_nome_centri = file_centri_op.getLine(nome_centro);
             }
 
-            while (line_nome_centri!=0) {
-                for (int i=0; i<line_nome_centri.length; i++) {
-                    System.out.println(line_nome_centri[i]);
-                }
+            if (line_nome_centri!=-1) {
+                Cittadini.visualizzaInfoCentroVaccinale(nome_centro);
             }
 
-            System.out.println("Scrivere il nome del centro di interesse: ");
-            String centro_scelto = input.nextLine();
-            Cittadini.visualizzaInfoCentroVaccinale(centro_scelto);
 
+        } else if (scelta==2){
 
-        } else if {
-
-
+            System.out.println("Inserisci il nome del centro vaccinale: ");
+            String nome_centro = input.nextLine();
 
         }
 
