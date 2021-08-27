@@ -17,6 +17,18 @@ public class Login {
         System.out.println("Inserisci username: ");
         String userid = input.nextLine();
         int line_cit = file_cittadini_op.getLine(userid);
+
+        while (line_cit==-1) {
+            System.out.println("Valore non trovato, riprova oppure digita exit per uscire: ");
+            userid = input.nextLine();
+            if (userid.equals("exit")) {
+                break;
+            } else {
+                line_cit = file_cittadini_op.getLine(userid);
+            }
+        }
+
+
         System.out.println("Inserisci password oppure digita exit per tornare indietro: ");
         String password = input.nextLine();
         String[] riga_cit = file_cittadini_op.read(line_cit);
@@ -37,7 +49,7 @@ public class Login {
             login_ok = true;
         }
         return login_ok;
-
+            //Cittadini.cercaCentroVaccinale();
     }
 
 }
