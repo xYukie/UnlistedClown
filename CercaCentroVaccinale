@@ -50,7 +50,7 @@ public class CercaCentroVaccinale {
 
             System.out.println("Centri trovati: ");
 
-            for (int i=0, i<lettura_righe_comune.length, i++) {
+            for (int i=0; i<lettura_righe_comune.length; i++) {
                 if (tipo.equals(lettura_righe_comune[i][1]))
                     System.out.println(lettura_righe_comune[i][0]);
             }
