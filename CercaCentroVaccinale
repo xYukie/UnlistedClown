@@ -45,16 +45,24 @@ public class CercaCentroVaccinale {
                 line_comune[0] = file_centri_op.getLine(comune,3,0);
             }
 
-            for (int i=0; i< line_comune.length; i++) {
+            for (int i=0; i<line_comune.length; i++) {
                 if (file_centri_op.getLine(comune,3,i)==-1)
                     break;
                 line_comune[i] = file_centri_op.getLine(comune, 3, i);
+                }
+
+            for(int i=0;i<line_comune.length;i++){
+                if(line_comune[i]!=null){
+                    dim++
+                }
+                else{
+                    break;
                 }
             }
 
             System.out.println("Inserisci la tipologia: ");
             String tipo = input.nextLine();
-            String[][] lettura_righe_comune = new String[line_comune.length][6];
+            String[][] lettura_righe_comune = new String[dim][6];
 
             for (int i=0; i<lettura_righe_comune.length; i++) {
                 lettura_righe_comune[i] = file_centri_op.read(line_comune[i]);
