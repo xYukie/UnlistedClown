@@ -11,9 +11,7 @@ public class CercaCentroVaccinale {
 
     public void cercaCentroVaccinale() {
         Scanner input = new Scanner(System.in);
-
-        System.out.println("Scegli il tipo di ricerca:\n1) per nome\n2) per comune e tipologia: ");
-        byte scelta = input.nextByte();
+        byte scelta = Controlli.controllomenu((byte) 0 ,(byte) 2, "Scegli il tipo di ricerca:\n1) per nome\n2) per comune e tipologia\n3) per tornare indietro: ");
 
         if (scelta==1) {
 
@@ -50,9 +48,10 @@ public class CercaCentroVaccinale {
             String tipo = input.nextLine();
             String[][] lettura_righe_comune = file_centri_op.read(line_comune);
 
+            System.out.println("Centri trovati: ");
+
             for (int i=0, i<lettura_righe_comune.length, i++) {
                 if (tipo.equals(lettura_righe_comune[i][1]))
-                    System.out.println("Centri trovati: ");
                     System.out.println(lettura_righe_comune[i][0]);
             }
 
@@ -60,7 +59,8 @@ public class CercaCentroVaccinale {
             String centro_scelto = input.nextLine();
             Cittadini.visualizzaInfoCentroVaccinale(centro_scelto);
 
-
+        } else (scelta==3) {
+            break;
         }
 
     }
