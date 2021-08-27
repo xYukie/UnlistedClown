@@ -38,7 +38,7 @@ public class Login {
             if (password.equals(riga_cit[1])) {
                 ok = true;
                 break;
-            } else if (password.equals("exit") {
+            } else if (password.equals("exit")) {
                 break;
             } else {
                 System.out.println("Valore errato, riprova.");
