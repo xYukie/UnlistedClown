@@ -33,10 +33,33 @@ public class CercaCentroVaccinale {
             }
 
 
-        } else if (scelta==2){
+        } else if (scelta==2) {
 
-            System.out.println("Inserisci il nome del centro vaccinale: ");
-            String nome_centro = input.nextLine();
+            System.out.println("Inserisci il nome del comune: ");
+            String comune = input.nextLine();
+
+            int[] line_comune = file_centri_op.getLine(comune);
+
+            while (line_comune.length==0) {
+                System.out.println("Centro non trovato, riprova: ");
+                comune = input.nextLine();
+                line_comune[] = file_centri_op.getLine(comune);
+            }
+
+            System.out.println("Inserisci la tipologia: ");
+            String tipo = input.nextLine();
+            String[][] lettura_righe_comune = file_centri_op.read(line_comune);
+
+            for (int i=0, i<lettura_righe_comune.length, i++) {
+                if (tipo.equals(lettura_righe_comune[i][1]))
+                    System.out.println("Centri trovati: ");
+                    System.out.println(lettura_righe_comune[i][0]);
+            }
+
+            System.out.println("Scrivere il nome del centro di interesse: ");
+            String centro_scelto = input.nextLine();
+            Cittadini.visualizzaInfoCentroVaccinale(centro_scelto);
+
 
         }
 
