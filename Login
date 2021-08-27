@@ -49,7 +49,7 @@ public class Login {
             login_ok = true;
         }
         return login_ok;
-            //Cittadini.cercaCentroVaccinale();
+
     }
 
 }
