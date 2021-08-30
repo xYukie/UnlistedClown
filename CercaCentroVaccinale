@@ -14,8 +14,12 @@ public class CercaCentroVaccinale {
         byte scelta = Controlli.controllomenu((byte) 0 ,(byte) 2, "Scegli il tipo di ricerca:\n1) per nome\n2) per comune e tipologia\n3) per tornare indietro: ");
 
         if (scelta==1) {
+			
+			String[] vetprima = file_centri_op.firstColumn();
 
-            System.out.println("Inserisci il nome del centro vaccinale: ");
+			for(int i=0; i<vetprima.length; i++)
+				System.out.println(vetprima[i]);
+            System.out.println("Inserisci il nome del centro vaccinale tra quelli elencati: ");
             String nome_centro = input.nextLine();
 
             int line_nome_centri = file_centri_op.getLine(nome_centro);
@@ -37,29 +41,28 @@ public class CercaCentroVaccinale {
             String comune = input.nextLine();
             int dim = file_centri_op.getLineCount();
             int[] line_comune = new int[dim];
-            line_comune[0] = file_centri_op.getLine(comune,3,0);
-
+            line_comune[0] = file_centri_op.getLine(comune,3,-1);
             while (line_comune[0]==-1) {
                 System.out.println("Centro non trovato, riprova: ");
                 comune = input.nextLine();
                 line_comune[0] = file_centri_op.getLine(comune,3,0);
             }
 
-            for (int i=0; i<line_comune.length; i++) {
+            for (int i=1; i<line_comune.length; i++) {
                 if (file_centri_op.getLine(comune,3,i)==-1)
                     break;
-                line_comune[i] = file_centri_op.getLine(comune, 3, i);
-                }
-
-            for(int i=0;i<line_comune.length;i++){
-                if(line_comune[i]!=null){
-                    dim++;
+				line_comune[i] = file_centri_op.getLine(comune, 3, i);
+            }
+			dim=1;
+            for(int i=1;i<line_comune.length;i++){
+                if(line_comune[i]==-1||line_comune[i]==line_comune[i-1]){
+					break;
                 }
                 else{
-                    break;
+                    dim++;
                 }
             }
-
+			
             System.out.println("Inserisci la tipologia: ");
             String tipo = input.nextLine();
             String[][] lettura_righe_comune = new String[dim][6];
@@ -79,8 +82,8 @@ public class CercaCentroVaccinale {
             String centro_scelto = input.nextLine();
             Cittadini.visualizzaInfoCentroVaccinale(centro_scelto);
 
-        } else (scelta==3) {
-            break;
+        }else {
+           break;
         }
 
     }
