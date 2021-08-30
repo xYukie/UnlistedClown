@@ -1,18 +1,14 @@
 package Cittadini;
 
-import Controlli.*;
 import FileManager.*;
 import java.util.Scanner;
 
 public class Login {
-
     FileManager file_cittadini = new FileManager("Cittadini_Registrati");
     DataManager file_cittadini_op = new DataManager(file_cittadini);
 
-
-    public boolean login() {
+    public int login() {
         Scanner input = new Scanner(System.in);
-        boolean login_ok = false;
 
         System.out.println("Inserisci username: ");
         String userid = input.nextLine();
@@ -45,10 +41,12 @@ public class Login {
                 password = input.nextLine();
             }
         }
+        
         if(ok) {
-            login_ok = true;
+            return line_cit;
+        } else {
+            return -1;
         }
-        return login_ok;
 
     }
 
